@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "python-template"
+version = "0.6.5"
+description = "Used to templatize python projects."
+authors = ["Loïc Motheu <lmotheu@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+loguru = "^0.7.2"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.13.0"
+pre-commit = "^4.0.1"
+pytest = "^8.3.4"
+ruff = "^0.8.1"
+
+[tool.ruff]
+src = ["src"]
+line-length = 120
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D203", "COM812", "ISC001", "D213", "FA102"]
+fixable = ["ALL"]
+unfixable = []
+exclude = ["tests/*"]
+
+[tool.mypy]
+exclude = "tests/*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
