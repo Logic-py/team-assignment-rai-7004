@@ -57,7 +57,7 @@ class ClassificationMetricHandler(BaseMetricsHandler):
         """
         accuracy = ClassificationMetricHandler.compute_accuracy_score(y_true=y_true, y_pred=y_pred)
 
-        if not y_proba:
+        if y_proba is None:
             logger.error("Variable [y_proba] is mandatory in ClassificationMetricHandler")
             raise ValueError
 
