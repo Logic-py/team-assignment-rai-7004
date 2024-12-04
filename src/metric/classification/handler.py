@@ -6,7 +6,6 @@ from loguru import logger
 from numpy import ndarray
 from sklearn.metrics import accuracy_score, roc_auc_score
 from src.metric.base_metric_handler import BaseMetricsHandler
-from src.metric.base_result import BaseMetricResult
 from src.metric.classification.result import ClassificationMetricResult
 
 
@@ -43,7 +42,9 @@ class ClassificationMetricHandler(BaseMetricsHandler):
         """
         return roc_auc_score(y_true=y_true, y_score=y_proba)
 
-    def compute_metrics(self, y_true: ndarray, y_pred: ndarray, y_proba: Optional[ndarray] = None) -> BaseMetricResult:
+    def compute_metrics(
+        self, y_true: ndarray, y_pred: ndarray, y_proba: Optional[ndarray] = None
+    ) -> ClassificationMetricResult:
         """Compute all relevant metrics for a given task and return them in a structured datamodel.
 
         Args:

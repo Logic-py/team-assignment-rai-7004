@@ -5,7 +5,6 @@ from typing import Optional
 from numpy import ndarray
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from src.metric.base_metric_handler import BaseMetricsHandler
-from src.metric.base_result import BaseMetricResult
 from src.metric.regression.result import RegressionMetricResult
 
 
@@ -57,7 +56,9 @@ class RegressionMetricHandler(BaseMetricsHandler):
         """
         return r2_score(y_true=y_true, y_pred=y_pred)
 
-    def compute_metrics(self, y_true: ndarray, y_pred: ndarray, y_proba: Optional[ndarray] = None) -> BaseMetricResult:
+    def compute_metrics(
+        self, y_true: ndarray, y_pred: ndarray, y_proba: Optional[ndarray] = None
+    ) -> RegressionMetricResult:
         """Compute all relevant metrics for a given task and return them in a structured datamodel.
 
         Args:
