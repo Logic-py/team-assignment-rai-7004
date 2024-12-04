@@ -2,6 +2,7 @@
 
 from typing import Optional
 
+from loguru import logger
 from numpy import ndarray
 from sklearn.metrics import accuracy_score, roc_auc_score
 from src.metric.base_metric_handler import BaseMetricsHandler
@@ -55,6 +56,11 @@ class ClassificationMetricHandler(BaseMetricsHandler):
 
         """
         accuracy = ClassificationMetricHandler.compute_accuracy_score(y_true=y_true, y_pred=y_pred)
+
+        if not y_proba:
+            logger.error("Variable [y_proba] is mandatory in ClassificationMetricHandler")
+            raise ValueError
+
         roc_auc = ClassificationMetricHandler.compute_area_under_curve_score(y_true=y_true, y_proba=y_proba)
 
         return ClassificationMetricResult(accuracy=accuracy, roc_auc=roc_auc)

@@ -38,8 +38,8 @@ exclude = ["tests/*"]
 
 [tool.mypy]
 exclude = "tests/*"
-explicit_package_bases = false
-no_namespace_packages = true
+explicit_package_bases = true #Allow for reusable file names in different modules.
+ignore_missing_imports = true #Used for scikit-learn missing stubs.
 
 [build-system]
 requires = ["poetry-core"]
