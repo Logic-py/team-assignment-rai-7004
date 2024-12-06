@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass
 
-from src.metric.base_result import BaseMetricResult
+from src.ml_pipeline_handler.metric.base_result import BaseMetricResult
 
 
 @dataclass

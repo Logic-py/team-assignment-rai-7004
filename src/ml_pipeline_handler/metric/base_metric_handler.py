@@ -5,8 +5,8 @@ from typing import Optional
 
 from numpy import ndarray
 
-from src.metric.base_result import BaseMetricResult
-from src.metric.model_type import ModelType
+from src.ml_pipeline_handler.metric.base_result import BaseMetricResult
+from src.ml_pipeline_handler.metric.model_type import ModelType
 
 
 class BaseMetricsHandler(ABC):

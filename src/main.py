@@ -2,7 +2,7 @@
 
 from loguru import logger
 
-from algorithm import AlgorithmType
+from src.ml_pipeline_handler.algorithm import AlgorithmType
 
 
 def main(

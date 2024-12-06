@@ -5,8 +5,8 @@ from typing import Optional
 from numpy import ndarray
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
-from src.metric.base_metric_handler import BaseMetricsHandler
-from src.metric.regression.result import RegressionMetricResult
+from src.ml_pipeline_handler.metric.base_metric_handler import BaseMetricsHandler
+from src.ml_pipeline_handler.metric.regression.result import RegressionMetricResult
 
 
 class RegressionMetricHandler(BaseMetricsHandler):

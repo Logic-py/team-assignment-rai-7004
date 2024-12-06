@@ -3,13 +3,13 @@
 import numpy as np
 import pytest
 
-from src.metric.base_metric_handler import BaseMetricsHandler
-from src.metric.classification.handler import ClassificationMetricHandler
-from src.metric.classification.result import ClassificationMetricResult
-from src.metric.metric_factory import MetricFactory
-from src.metric.model_type import ModelType
-from src.metric.regression.handler import RegressionMetricHandler
-from src.metric.regression.result import RegressionMetricResult
+from src.ml_pipeline_handler.metric import BaseMetricsHandler
+from src.ml_pipeline_handler.metric.classification.handler import ClassificationMetricHandler
+from src.ml_pipeline_handler.metric import ClassificationMetricResult
+from src.ml_pipeline_handler.metric import MetricFactory
+from src.ml_pipeline_handler.metric import ModelType
+from src.ml_pipeline_handler.metric import RegressionMetricHandler
+from src.ml_pipeline_handler.metric.regression.result import RegressionMetricResult
 
 
 # region Factory Tests
