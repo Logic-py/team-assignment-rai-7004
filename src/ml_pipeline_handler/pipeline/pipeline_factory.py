@@ -1,10 +1,5 @@
-"""Pipeline Factory Module."""
-
-from ..algorithm import AlgorithmType
-from ..pipeline.base_config import PipelineConfig
-from ..pipeline.base_pipeline import BasePipeline
-from ..pipeline.linear_regression_pipeline import LinearRegressionPipeline
-
+from ..pipeline.decision_tree_classifier_pipeline import DecisionTreeClassifierPipeline
+from ..pipeline.decision_tree_regressor_pipeline import DecisionTreeRegressorPipeline
 
 class PipelineFactory:
     """Pipeline Factory class."""
@@ -22,6 +17,9 @@ class PipelineFactory:
         """
         if config.algorithm == AlgorithmType.LINEAR_REGRESSION:
             return LinearRegressionPipeline(config=config)
+        elif config.algorithm == AlgorithmType.DECISION_TREE_CLASSIFIER:
+            return DecisionTreeClassifierPipeline(config=config)
+        elif config.algorithm == AlgorithmType.DECISION_TREE_REGRESSOR:
+            return DecisionTreeRegressorPipeline(config=config)
 
-        # TODO: the other model types.
-        raise NotImplementedError
+        raise NotImplementedError(f"Algorithm '{config.algorithm}' is not implemented.")

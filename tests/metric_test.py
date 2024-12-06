@@ -3,13 +3,19 @@
 import numpy as np
 import pytest
 
-from src.ml_pipeline_handler.metric import BaseMetricsHandler
-from src.ml_pipeline_handler.metric.classification.handler import ClassificationMetricHandler
-from src.ml_pipeline_handler.metric import ClassificationMetricResult
-from src.ml_pipeline_handler.metric import MetricFactory
-from src.ml_pipeline_handler.metric import ModelType
-from src.ml_pipeline_handler.metric import RegressionMetricHandler
-from src.ml_pipeline_handler.metric.regression.result import RegressionMetricResult
+from ml_pipeline_handler.metric import BaseMetricsHandler
+from ml_pipeline_handler.metric.classification.handler import ClassificationMetricHandler
+from ml_pipeline_handler.metric import ClassificationMetricResult
+from ml_pipeline_handler.metric import MetricFactory
+from ml_pipeline_handler.metric import ModelType
+from ml_pipeline_handler.metric import RegressionMetricHandler
+from ml_pipeline_handler.metric.regression.result import RegressionMetricResult
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
+
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 
 # region Factory Tests
@@ -181,3 +187,36 @@ def test_compute_metrics_ignores_y_proba() -> None:
 
 
 # endregion
+
+def test_decision_tree_classifier_metrics() -> None:
+    """Test Decision Tree Classifier metrics computation."""
+
+    model = DecisionTreeClassifier(random_state=42)
+    model.fit(X=classification_y_true.reshape(-1, 1), y=classification_y_true)
+
+
+    y_pred = model.predict(classification_y_true.reshape(-1, 1))
+    y_proba = model.predict_proba(classification_y_true.reshape(-1, 1))[:, 1]
+
+
+    handler = ClassificationMetricHandler(model_type=ModelType.CLASSIFICATION)
+    result = handler.compute_metrics(y_true=classification_y_true, y_pred=y_pred, y_proba=y_proba)
+
+
+    assert result.accuracy == pytest.approx(expected=1.0), f"Expected accuracy 1.0, got {result.accuracy}"
+    assert result.roc_auc == pytest.approx(expected=1.0), f"Expected ROC AUC 1.0, got {result.roc_auc}"
+
+def test_decision_tree_regressor_metrics() -> None:
+    """Test Decision Tree Regressor metrics computation."""
+    # Inizializza il modello
+    model = DecisionTreeRegressor(random_state=42)
+    model.fit(X=regression_y_true.reshape(-1, 1), y=regression_y_true)
+
+    y_pred = model.predict(regression_y_true.reshape(-1, 1))
+
+    handler = RegressionMetricHandler(model_type=ModelType.REGRESSION)
+    result = handler.compute_metrics(y_true=regression_y_true, y_pred=y_pred)
+
+    assert result.mean_absolute_error == pytest.approx(expected=0.0), f"Expected MAE 0.0, got {result.mean_absolute_error}"
+    assert result.mean_squared_error == pytest.approx(expected=0.0), f"Expected MSE 0.0, got {result.mean_squared_error}"
+    assert result.r_square == pytest.approx(expected=1.0), f"Expected R² 1.0, got {result.r_square}"
