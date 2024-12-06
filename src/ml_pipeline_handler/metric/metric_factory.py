@@ -2,10 +2,10 @@
 
 from loguru import logger
 
-from src.ml_pipeline_handler.metric.base_metric_handler import BaseMetricsHandler
-from src.ml_pipeline_handler.metric.classification.handler import ClassificationMetricHandler
-from src.ml_pipeline_handler.metric.model_type import ModelType
-from src.ml_pipeline_handler.metric.regression.handler import RegressionMetricHandler
+from ..metric.base_metric_handler import BaseMetricsHandler
+from ..metric.classification.handler import ClassificationMetricHandler
+from ..metric.model_type import ModelType
+from ..metric.regression.handler import RegressionMetricHandler
 
 
 class MetricFactory:

@@ -7,8 +7,8 @@ from numpy import ndarray
 from pandas import Series
 from sklearn.metrics import accuracy_score, roc_auc_score
 
-from src.ml_pipeline_handler.metric.base_metric_handler import BaseMetricsHandler
-from src.ml_pipeline_handler.metric.classification.result import ClassificationMetricResult
+from ...metric.base_metric_handler import BaseMetricsHandler
+from ...metric.classification.result import ClassificationMetricResult
 
 
 class ClassificationMetricHandler(BaseMetricsHandler):

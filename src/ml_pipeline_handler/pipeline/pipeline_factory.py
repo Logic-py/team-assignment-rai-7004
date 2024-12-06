@@ -1,9 +1,9 @@
 """Pipeline Factory Module."""
 
-from src.ml_pipeline_handler.algorithm import AlgorithmType
-from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
-from src.ml_pipeline_handler.pipeline.base_pipeline import BasePipeline
-from src.ml_pipeline_handler.pipeline.linear_regression_pipeline import LinearRegressionPipeline
+from ..algorithm import AlgorithmType
+from ..pipeline.base_config import PipelineConfig
+from ..pipeline.base_pipeline import BasePipeline
+from ..pipeline.linear_regression_pipeline import LinearRegressionPipeline
 
 
 class PipelineFactory:
