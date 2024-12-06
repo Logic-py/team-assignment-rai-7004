@@ -4,20 +4,22 @@ from typing import Optional
 
 from loguru import logger
 from numpy import ndarray
+from pandas import Series
 from sklearn.metrics import accuracy_score, roc_auc_score
-from src.metric.base_metric_handler import BaseMetricsHandler
-from src.metric.classification.result import ClassificationMetricResult
+
+from src.ml_pipeline_handler.metric.base_metric_handler import BaseMetricsHandler
+from src.ml_pipeline_handler.metric.classification.result import ClassificationMetricResult
 
 
 class ClassificationMetricHandler(BaseMetricsHandler):
     """Classification Metric Handler."""
 
     @staticmethod
-    def compute_accuracy_score(y_true: ndarray, y_pred: ndarray) -> float:
+    def compute_accuracy_score(y_true: Series, y_pred: ndarray) -> float:
         """Compute the accuracy score for a classification task.
 
         Args:
-            y_true (ndarray): The ground truth (actual) labels.
+            y_true (Series): The ground truth (actual) labels.
             y_pred (ndarray): The predicted labels.
 
         Returns:
@@ -28,11 +30,11 @@ class ClassificationMetricHandler(BaseMetricsHandler):
         return accuracy_score(y_true=y_true, y_pred=y_pred)
 
     @staticmethod
-    def compute_area_under_curve_score(y_true: ndarray, y_proba: ndarray) -> float:
+    def compute_area_under_curve_score(y_true: Series, y_proba: ndarray) -> float:
         """Compute the Area Under the Receiver Operating Characteristic Curve (ROC AUC).
 
         Args:
-            y_true (ndarray): The ground truth (actual) binary labels.
+            y_true (Series): The ground truth (actual) binary labels.
             y_proba (ndarray): The predicted probabilities for the positive class.
 
         Returns:
@@ -43,12 +45,12 @@ class ClassificationMetricHandler(BaseMetricsHandler):
         return roc_auc_score(y_true=y_true, y_score=y_proba)
 
     def compute_metrics(
-        self, y_true: ndarray, y_pred: ndarray, y_proba: Optional[ndarray] = None
+        self, y_true: Series, y_pred: ndarray, y_proba: Optional[ndarray] = None
     ) -> ClassificationMetricResult:
         """Compute all relevant metrics for a given task and return them in a structured datamodel.
 
         Args:
-            y_true (ndarray): The ground truth (actual) values.
+            y_true (Series): The ground truth (actual) values.
             y_pred (ndarray): The predicted values.
             y_proba (Optional[ndarray]): The predicted probabilities for the positive class (classification only).
 

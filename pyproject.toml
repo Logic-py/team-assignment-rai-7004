@@ -11,6 +11,8 @@ python = "^3.12"
 loguru = "^0.7.2"
 scikit-learn = "^1.5.2"
 numpy = "^2.1.3"
+pandas = "^2.2.3"
+jupyter = "^1.1.1"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.13.0"
@@ -31,7 +33,7 @@ line-ending = "auto"
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["D203", "COM812", "ISC001", "D213", "FA102", "FA100"]
+ignore = ["D203", "COM812", "ISC001", "D213", "FA102", "FA100", "EM102", "TRY003", "RET503", "TD003", "FIX002", "TD002", "TC002", "PLR0913"]
 fixable = ["ALL"]
 unfixable = []
 exclude = ["tests/*"]

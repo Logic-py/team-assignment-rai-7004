@@ -1,10 +1,11 @@
 """Metrics Factory Module."""
 
 from loguru import logger
-from src.metric.base_metric_handler import BaseMetricsHandler
-from src.metric.classification.handler import ClassificationMetricHandler
-from src.metric.model_type import ModelType
-from src.metric.regression.handler import RegressionMetricHandler
+
+from src.ml_pipeline_handler.metric.base_metric_handler import BaseMetricsHandler
+from src.ml_pipeline_handler.metric.classification.handler import ClassificationMetricHandler
+from src.ml_pipeline_handler.metric.model_type import ModelType
+from src.ml_pipeline_handler.metric.regression.handler import RegressionMetricHandler
 
 
 class MetricFactory:
