@@ -1,5 +1,9 @@
 from ..pipeline.decision_tree_classifier_pipeline import DecisionTreeClassifierPipeline
 from ..pipeline.decision_tree_regressor_pipeline import DecisionTreeRegressorPipeline
+from ..pipeline.linear_regression_pipeline import LinearRegressionPipeline
+from ..pipeline.base_config import PipelineConfig
+from ..pipeline.base_pipeline import BasePipeline
+from ..algorithm import AlgorithmType
 
 class PipelineFactory:
     """Pipeline Factory class."""
@@ -14,6 +18,8 @@ class PipelineFactory:
         Returns:
             BasePipeline object that contains a specific model type.
 
+        Raises:
+            NotImplementedError: If the specified algorithm is not supported.
         """
         if config.algorithm == AlgorithmType.LINEAR_REGRESSION:
             return LinearRegressionPipeline(config=config)
