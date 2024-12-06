@@ -1,7 +1,6 @@
 """Main Module."""
 
 from loguru import logger
-
 from src.ml_pipeline_handler.algorithm import AlgorithmType
 from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
 from src.ml_pipeline_handler.pipeline.pipeline_factory import PipelineFactory
@@ -58,7 +57,7 @@ def main(
 
 if __name__ == "__main__":
     main(
-        data_path="data/housing.csv",
+        data_path="src/data/housing.csv",
         features=["OverallQual", "GrLivArea", "GarageCars", "GarageArea", "TotalBsmtSF"],
         target_column="SalePrice",
         algorithm=AlgorithmType.LINEAR_REGRESSION,

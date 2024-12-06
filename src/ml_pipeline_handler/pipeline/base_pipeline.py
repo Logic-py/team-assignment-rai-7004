@@ -6,9 +6,9 @@ from numpy import ndarray
 from pandas import DataFrame, Series
 from sklearn.model_selection import train_test_split
 
-from src.ml_pipeline_handler.io.loader import load_data
-from src.ml_pipeline_handler.metric.base_result import BaseMetricResult
-from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
+from ..io.loader import load_data
+from ..metric.base_result import BaseMetricResult
+from ..pipeline.base_config import PipelineConfig
 
 
 class BasePipeline(ABC):
