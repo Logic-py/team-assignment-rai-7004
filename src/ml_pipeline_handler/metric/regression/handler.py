@@ -3,6 +3,7 @@
 from typing import Optional
 
 from numpy import ndarray
+from pandas import Series
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 from src.ml_pipeline_handler.metric.base_metric_handler import BaseMetricsHandler
@@ -13,11 +14,11 @@ class RegressionMetricHandler(BaseMetricsHandler):
     """Regression Metric Handler."""
 
     @staticmethod
-    def compute_mean_absolute_error(y_true: ndarray, y_pred: ndarray) -> float:
+    def compute_mean_absolute_error(y_true: Series, y_pred: ndarray) -> float:
         """Compute the Mean Absolute Error (MAE) for regression tasks.
 
         Args:
-            y_true (ndarray): The ground truth (actual) values.
+            y_true (Series): The ground truth (actual) values.
             y_pred (ndarray): The predicted values.
 
         Returns:
@@ -28,11 +29,11 @@ class RegressionMetricHandler(BaseMetricsHandler):
         return mean_absolute_error(y_true=y_true, y_pred=y_pred)
 
     @staticmethod
-    def compute_mean_squared_error(y_true: ndarray, y_pred: ndarray) -> float:
+    def compute_mean_squared_error(y_true: Series, y_pred: ndarray) -> float:
         """Compute the Mean Squared Error (MSE) for regression tasks.
 
         Args:
-            y_true (ndarray): The ground truth (actual) values.
+            y_true (Series): The ground truth (actual) values.
             y_pred (ndarray): The predicted values.
 
         Returns:
@@ -43,11 +44,11 @@ class RegressionMetricHandler(BaseMetricsHandler):
         return mean_squared_error(y_true=y_true, y_pred=y_pred)
 
     @staticmethod
-    def compute_r_square_score(y_true: ndarray, y_pred: ndarray) -> float:
+    def compute_r_square_score(y_true: Series, y_pred: ndarray) -> float:
         """Compute the R-squared (R²) score for regression tasks.
 
         Args:
-            y_true (ndarray): The ground truth (actual) values.
+            y_true (Series): The ground truth (actual) values.
             y_pred (ndarray): The predicted values.
 
         Returns:
@@ -58,12 +59,12 @@ class RegressionMetricHandler(BaseMetricsHandler):
         return r2_score(y_true=y_true, y_pred=y_pred)
 
     def compute_metrics(
-        self, y_true: ndarray, y_pred: ndarray, y_proba: Optional[ndarray] = None
+        self, y_true: Series, y_pred: ndarray, y_proba: Optional[ndarray] = None
     ) -> RegressionMetricResult:
         """Compute all relevant metrics for a given task and return them in a structured datamodel.
 
         Args:
-            y_true (ndarray): The ground truth (actual) values.
+            y_true (Series): The ground truth (actual) values.
             y_pred (ndarray): The predicted values.
             y_proba (Optional[ndarray]): The predicted probabilities for the positive class (classification only).
 

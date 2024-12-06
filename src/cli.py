@@ -11,7 +11,8 @@ def cli() -> None:
     """CLI wrapper for the main application.
 
     Example usage:
-        python src/cli.py --data_path=whatever --target_column=whatever --algorithm=whatever --random_state=42 --num_folds=5 --out_file=daswhaw
+        python src/cli.py --data_path=whatever --target_column=whatever --algorithm=whatever --random_state=42
+         --num_folds=5 --out_file=daswhaw
 
     Returns:
         None

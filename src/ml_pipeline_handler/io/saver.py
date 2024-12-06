@@ -2,7 +2,7 @@
 
 
 def save_data() -> None:
-    """TODO
+    """TODO.
 
     Returns:
         TODO
