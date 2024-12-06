@@ -1,6 +1,7 @@
 """Metrics Factory Module."""
 
 from loguru import logger
+
 from src.metric.base_metric_handler import BaseMetricsHandler
 from src.metric.classification.handler import ClassificationMetricHandler
 from src.metric.model_type import ModelType

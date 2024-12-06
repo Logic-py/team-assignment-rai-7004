@@ -6,5 +6,5 @@ def save_data() -> None:
 
     Returns:
         TODO
+
     """
-    pass

@@ -5,6 +5,7 @@ from typing import Optional
 from loguru import logger
 from numpy import ndarray
 from sklearn.metrics import accuracy_score, roc_auc_score
+
 from src.metric.base_metric_handler import BaseMetricsHandler
 from src.metric.classification.result import ClassificationMetricResult
 
