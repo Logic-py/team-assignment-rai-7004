@@ -11,9 +11,9 @@ __all__ = [
     "BaseMetricResult",
     "BaseMetricsHandler",
     "ClassificationMetricHandler",
-    "ClassificationMetricResult",
-    "MetricFactory",
-    "ModelType",
+    "ClassificationMetricResult",  
     "RegressionMetricHandler",
-    "RegressionMetricResult",
+    "RegressionMetricResult", 
+    "ModelType",
+    "MetricFactory",
 ]
