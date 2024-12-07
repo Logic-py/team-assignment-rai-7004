@@ -58,7 +58,13 @@ def main(
 if __name__ == "__main__":
     main(
         data_path="src/data/housing.csv",
-        features=["OverallQual", "GrLivArea", "GarageCars", "GarageArea", "TotalBsmtSF"],
+        features=[
+            "OverallQual",
+            "GrLivArea",
+            "GarageCars",
+            "GarageArea",
+            "TotalBsmtSF",
+        ],
         target_column="SalePrice",
         algorithm=AlgorithmType.LINEAR_REGRESSION,
         out_file="",

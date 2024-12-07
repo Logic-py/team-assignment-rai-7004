@@ -6,9 +6,9 @@ from numpy import ndarray
 from pandas import DataFrame, Series
 from sklearn.model_selection import train_test_split
 
-from ..io.loader import load_data
-from ..metric.base_result import BaseMetricResult
-from ..pipeline.base_config import PipelineConfig
+from src.ml_pipeline_handler.io.loader import load_data
+from src.ml_pipeline_handler.metric.base_result import BaseMetricResult
+from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
 
 
 class BasePipeline(ABC):
@@ -30,7 +30,9 @@ class BasePipeline(ABC):
             tuple[DataFrame, Series] of the features and target.
 
         """
-        return load_data(data_path=self.config.data_path, target_column=self.config.target_column)
+        return load_data(
+            data_path=self.config.data_path, target_column=self.config.target_column
+        )
 
     def create_training_set(
         self, features: DataFrame, target: Series, test_size: float

@@ -1,3 +1,10 @@
+"""Decision Tree Classifier Pipeline Module.
+
+This module implements a pipeline class for decision tree classification models.
+It provides functionality for data loading, training, prediction, and metric
+computation for classification tasks.
+"""
+
 from typing import Optional
 
 from numpy import ndarray
@@ -5,11 +12,10 @@ from pandas import Series
 from sklearn.tree import DecisionTreeClassifier
 
 from src.ml_pipeline_handler.metric.base_result import BaseMetricResult
-
-from ..metric.metric_factory import MetricFactory
-from ..metric.model_type import ModelType
-from ..pipeline.base_config import PipelineConfig
-from ..pipeline.base_pipeline import BasePipeline
+from src.ml_pipeline_handler.metric.metric_factory import MetricFactory
+from src.ml_pipeline_handler.metric.model_type import ModelType
+from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
+from src.ml_pipeline_handler.pipeline.base_pipeline import BasePipeline
 
 
 class DecisionTreeClassifierPipeline(BasePipeline):
@@ -24,7 +30,9 @@ class DecisionTreeClassifierPipeline(BasePipeline):
         """
         super().__init__(config=config)
         self.model = DecisionTreeClassifier(random_state=config.random_state)
-        self.metric_handler = MetricFactory.get_metrics_handler(model_type=ModelType.CLASSIFICATION)
+        self.metric_handler = MetricFactory.get_metrics_handler(
+            model_type=ModelType.CLASSIFICATION
+        )
 
         self.x_train: Optional[ndarray] = None
         self.x_test: Optional[ndarray] = None
@@ -56,4 +64,6 @@ class DecisionTreeClassifierPipeline(BasePipeline):
             BaseMetricResult, containing metric information.
 
         """
-        return self.metric_handler.compute_metrics(y_true=self.y_test, y_pred=prediction)
+        return self.metric_handler.compute_metrics(
+            y_true=self.y_test, y_pred=prediction
+        )

@@ -7,8 +7,8 @@ from numpy import ndarray
 from pandas import Series
 from sklearn.metrics import accuracy_score, roc_auc_score
 
-from ...metric.base_metric_handler import BaseMetricsHandler
-from ...metric.classification.result import ClassificationMetricResult
+from src.ml_pipeline_handler.metric.base_metric_handler import BaseMetricsHandler
+from src.ml_pipeline_handler.metric.classification.result import ClassificationMetricResult
 
 
 class ClassificationMetricHandler(BaseMetricsHandler):
@@ -58,12 +58,18 @@ class ClassificationMetricHandler(BaseMetricsHandler):
             MetricsResults: A datamodel containing all computed metrics.
 
         """
-        accuracy = ClassificationMetricHandler.compute_accuracy_score(y_true=y_true, y_pred=y_pred)
+        accuracy = ClassificationMetricHandler.compute_accuracy_score(
+            y_true=y_true, y_pred=y_pred
+        )
 
         if y_proba is None:
-            logger.error("Variable [y_proba] is mandatory in ClassificationMetricHandler")
+            logger.error(
+                "Variable [y_proba] is mandatory in ClassificationMetricHandler"
+            )
             raise ValueError
 
-        roc_auc = ClassificationMetricHandler.compute_area_under_curve_score(y_true=y_true, y_proba=y_proba)
+        roc_auc = ClassificationMetricHandler.compute_area_under_curve_score(
+            y_true=y_true, y_proba=y_proba
+        )
 
         return ClassificationMetricResult(accuracy=accuracy, roc_auc=roc_auc)

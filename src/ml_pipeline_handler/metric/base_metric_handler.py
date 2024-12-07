@@ -6,8 +6,8 @@ from typing import Optional
 from numpy import ndarray
 from pandas import Series
 
-from ..metric.base_result import BaseMetricResult
-from ..metric.model_type import ModelType
+from src.ml_pipeline_handler.metric.base_result import BaseMetricResult
+from src.ml_pipeline_handler.metric.model_type import ModelType
 
 
 class BaseMetricsHandler(ABC):
@@ -23,7 +23,9 @@ class BaseMetricsHandler(ABC):
         self.model_type = model_type
 
     @abstractmethod
-    def compute_metrics(self, y_true: Series, y_pred: ndarray, y_proba: Optional[ndarray] = None) -> BaseMetricResult:
+    def compute_metrics(
+        self, y_true: Series, y_pred: ndarray, y_proba: Optional[ndarray] = None
+    ) -> BaseMetricResult:
         """Compute all relevant metrics for a given task and return them in a structured datamodel.
 
         Args:
