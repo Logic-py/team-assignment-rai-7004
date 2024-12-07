@@ -7,6 +7,7 @@ from ..metric.classification.handler import ClassificationMetricHandler
 from ..metric.model_type import ModelType
 from ..metric.regression.handler import RegressionMetricHandler
 
+
 class MetricFactory:
     """Metrics Factory pattern Class."""
 

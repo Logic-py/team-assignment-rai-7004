@@ -1,9 +1,12 @@
-from ..pipeline.decision_tree_classifier_pipeline import DecisionTreeClassifierPipeline
-from ..pipeline.decision_tree_regressor_pipeline import DecisionTreeRegressorPipeline
-from ..pipeline.linear_regression_pipeline import LinearRegressionPipeline
+from ..algorithm import AlgorithmType
 from ..pipeline.base_config import PipelineConfig
 from ..pipeline.base_pipeline import BasePipeline
-from ..algorithm import AlgorithmType
+from ..pipeline.decision_tree_classifier_pipeline import \
+    DecisionTreeClassifierPipeline
+from ..pipeline.decision_tree_regressor_pipeline import \
+    DecisionTreeRegressorPipeline
+from ..pipeline.linear_regression_pipeline import LinearRegressionPipeline
+
 
 class PipelineFactory:
     """Pipeline Factory class."""
@@ -23,9 +26,9 @@ class PipelineFactory:
         """
         if config.algorithm == AlgorithmType.LINEAR_REGRESSION:
             return LinearRegressionPipeline(config=config)
-        elif config.algorithm == AlgorithmType.DECISION_TREE_CLASSIFIER:
+        if config.algorithm == AlgorithmType.DECISION_TREE_CLASSIFIER:
             return DecisionTreeClassifierPipeline(config=config)
-        elif config.algorithm == AlgorithmType.DECISION_TREE_REGRESSOR:
+        if config.algorithm == AlgorithmType.DECISION_TREE_REGRESSOR:
             return DecisionTreeRegressorPipeline(config=config)
 
         raise NotImplementedError(f"Algorithm '{config.algorithm}' is not implemented.")

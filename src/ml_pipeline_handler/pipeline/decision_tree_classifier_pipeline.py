@@ -1,9 +1,11 @@
 from typing import Optional
+
 from numpy import ndarray
 from pandas import Series
 from sklearn.tree import DecisionTreeClassifier
 
 from src.ml_pipeline_handler.metric.base_result import BaseMetricResult
+
 from ..metric.metric_factory import MetricFactory
 from ..metric.model_type import ModelType
 from ..pipeline.base_config import PipelineConfig
