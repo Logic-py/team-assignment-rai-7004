@@ -8,9 +8,15 @@ linear regression, classification, and regression using decision trees.
 from src.ml_pipeline_handler.algorithm import AlgorithmType
 from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
 from src.ml_pipeline_handler.pipeline.base_pipeline import BasePipeline
-from src.ml_pipeline_handler.pipeline.decision_tree_classifier_pipeline import DecisionTreeClassifierPipeline
-from src.ml_pipeline_handler.pipeline.decision_tree_regressor_pipeline import DecisionTreeRegressorPipeline
-from src.ml_pipeline_handler.pipeline.linear_regression_pipeline import LinearRegressionPipeline
+from src.ml_pipeline_handler.pipeline.decision_tree_classifier_pipeline import (
+    DecisionTreeClassifierPipeline,
+)
+from src.ml_pipeline_handler.pipeline.decision_tree_regressor_pipeline import (
+    DecisionTreeRegressorPipeline,
+)
+from src.ml_pipeline_handler.pipeline.linear_regression_pipeline import (
+    LinearRegressionPipeline,
+)
 
 
 class PipelineFactory:
@@ -28,6 +34,7 @@ class PipelineFactory:
 
         Raises:
             NotImplementedError: If the specified algorithm is not supported.
+
         """
         if config.algorithm == AlgorithmType.LINEAR_REGRESSION:
             return LinearRegressionPipeline(config=config)
