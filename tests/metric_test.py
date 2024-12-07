@@ -2,19 +2,21 @@
 
 import numpy as np
 import pytest
+
+from ml_pipeline_handler.metric import BaseMetricsHandler
+from ml_pipeline_handler.metric.classification.handler import ClassificationMetricHandler
+from ml_pipeline_handler.metric import ClassificationMetricResult
+from ml_pipeline_handler.metric import MetricFactory
+from ml_pipeline_handler.metric import ModelType
+from ml_pipeline_handler.metric import RegressionMetricHandler
+from ml_pipeline_handler.metric.regression.result import RegressionMetricResult
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 
-from src.ml_pipeline_handler.metric import (
-    BaseMetricsHandler,
-    ClassificationMetricResult,
-    MetricFactory,
-    ModelType,
-    RegressionMetricHandler,
-)
-from src.ml_pipeline_handler.metric.classification.handler import (
-    ClassificationMetricHandler,
-)
-from src.ml_pipeline_handler.metric.regression.result import RegressionMetricResult
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+
 
 # region Factory Tests
 
