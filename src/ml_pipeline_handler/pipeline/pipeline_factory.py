@@ -23,6 +23,7 @@ class PipelineFactory:
 
         Raises:
             NotImplementedError: If the specified algorithm is not supported.
+
         """
         if config.algorithm == AlgorithmType.LINEAR_REGRESSION:
             return LinearRegressionPipeline(config=config)
