@@ -5,10 +5,7 @@ It provides functionality for data loading, training, prediction, and metric
 computation for classification tasks.
 """
 
-from typing import Optional
-
 from numpy import ndarray
-from pandas import Series
 from sklearn.tree import DecisionTreeClassifier
 
 from ...metric.base_result import BaseMetricResult
@@ -32,11 +29,6 @@ class DecisionTreeClassifierPipeline(BasePipeline):
         self.model = DecisionTreeClassifier(random_state=config.random_state)
         self.metric_handler = MetricFactory.get_metrics_handler(model_type=ModelType.CLASSIFICATION)
 
-        self.x_train: Optional[ndarray] = None
-        self.x_test: Optional[ndarray] = None
-        self.y_train: Optional[Series] = None
-        self.y_test: Optional[Series] = None
-
     def predict(self) -> ndarray:
         """Predict the target values based on the features.
 
@@ -49,8 +41,10 @@ class DecisionTreeClassifierPipeline(BasePipeline):
             features=features, target=target, test_size=0.3
         )
 
-        self.model.fit(X=self.x_train, y=self.y_train)
-        return self.model.predict(X=self.x_test)
+        x_train_to_use, x_test_to_use = self.pre_process_data(x_train=self.x_train, x_test=self.x_test)
+
+        self.model.fit(X=x_train_to_use, y=self.y_train)
+        return self.model.predict(X=x_test_to_use)
 
     def compute_metrics(self, prediction: ndarray) -> BaseMetricResult:
         """Compute the metrics of the given model.

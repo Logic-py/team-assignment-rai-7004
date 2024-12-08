@@ -37,14 +37,10 @@ class LinearRegressionPipeline(BasePipeline):
             features=features, target=target, test_size=0.3
         )
 
-        model = LinearRegression()
+        x_train_to_use, x_test_to_use = self.pre_process_data(x_train=self.x_train, x_test=self.x_test)
 
-        x_train_to_use, x_test_to_use = self.pre_process_data(
-            pre_processor=self.pre_processor, x_train=self.x_train, x_test=self.x_test
-        )
-
-        model.fit(X=x_train_to_use, y=self.y_train)
-        return model.predict(X=x_test_to_use)
+        self.model.fit(X=x_train_to_use, y=self.y_train)
+        return self.model.predict(X=x_test_to_use)
 
     def compute_metrics(self, prediction: ndarray) -> BaseMetricResult:
         """Compute the metrics of the given model.

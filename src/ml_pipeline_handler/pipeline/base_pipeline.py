@@ -83,13 +83,10 @@ class BasePipeline(ABC):
             ]
         )
 
-    def pre_process_data(
-        self, pre_processor: ColumnTransformer, x_train: ndarray, x_test: ndarray
-    ) -> tuple[ndarray, ndarray]:
+    def pre_process_data(self, x_train: ndarray, x_test: ndarray) -> tuple[ndarray, ndarray]:
         """Preprocessed the data based on the ColumnTransformer.
 
         Args:
-            pre_processor: ColumnTransformer that specifies scaler types per feature.
             x_train: ndarray, training data.
             x_test: ndarray, testing data.
 
@@ -98,6 +95,8 @@ class BasePipeline(ABC):
              else x_train, x_test.
 
         """
+        pre_processor = self.get_pre_processor()
+
         self.x_train_pre_processed = pre_processor.fit_transform(X=x_train)
         self.x_test_pre_processed = pre_processor.transform(X=x_test)
 
