@@ -57,8 +57,8 @@ class LinearRegressionPipeline(BasePipeline):
         x_test_to_use: ndarray = self.x_test_pre_processed
 
         if not self.config.has_pre_processing():
-            x_train_to_use: ndarray = self.x_train
-            x_test_to_use: ndarray = self.x_test
+            x_train_to_use = self.x_train
+            x_test_to_use = self.x_test
 
         model.fit(X=x_train_to_use, y=self.y_train)
         return model.predict(X=x_test_to_use)
