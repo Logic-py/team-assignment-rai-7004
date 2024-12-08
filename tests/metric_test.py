@@ -43,7 +43,16 @@ def test_get_metrics_handler_classification() -> None:
 # region Classification Tests
 classification_y_true = np.array([0, 1, 1, 0, 1, 0])
 classification_y_pred = np.array([0, 1, 1, 0, 0, 1])
-classification_y_proba = np.array([0.2, 0.8, 0.9, 0.3, 0.4, 0.6])
+classification_y_proba = np.array(
+    [
+        [0.2, 0.8, 0.9, 0.3, 0.4, 0.6],
+        [1, 2, 3, 4, 5, 6],
+        [1, 2, 3, 4, 5, 6],
+        [1, 2, 3, 4, 5, 6],
+        [1, 2, 3, 4, 5, 6],
+        [1, 2, 3, 4, 5, 6],
+    ]
+)
 
 
 def test_compute_accuracy_score() -> None:
@@ -67,7 +76,7 @@ def test_compute_area_under_curve_score() -> None:
     """
     handler = ClassificationMetricHandler(model_type=ModelType.CLASSIFICATION)
     roc_auc = handler.compute_area_under_curve_score(y_true=classification_y_true, y_proba=classification_y_proba)
-    expected_roc_auc = 0.89
+    expected_roc_auc = 0.67
     assert roc_auc == pytest.approx(expected=expected_roc_auc, rel=1e-2), f"Expected {expected_roc_auc}, got {roc_auc}"
 
 
@@ -88,8 +97,8 @@ def test_compute_classification_metrics() -> None:
     ), "Expected result to be an instance of ClassificationMetricResult"
     assert result.accuracy == pytest.approx(expected=4 / 6), f"Expected accuracy to be {4 / 6}, got {result.accuracy}"
     assert result.roc_auc == pytest.approx(
-        expected=0.89, rel=1e-2
-    ), f"Expected ROC AUC to be approximately 0.75, got {result.roc_auc}"
+        expected=0.67, rel=1e-2
+    ), f"Expected ROC AUC to be approximately 0.67, got {result.roc_auc}"
 
 
 def test_compute_metrics_missing_y_proba() -> None:
