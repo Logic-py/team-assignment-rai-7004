@@ -1,9 +1,6 @@
 """Linear Regression Module."""
 
-from typing import Optional
-
 from numpy import ndarray
-from pandas import Series
 from sklearn.linear_model import LinearRegression
 
 from ...metric.base_result import BaseMetricResult
@@ -28,14 +25,6 @@ class LinearRegressionPipeline(BasePipeline):
         self.metric_handler = MetricFactory.get_metrics_handler(model_type=ModelType.REGRESSION)
         self.pre_processor = self.get_pre_processor()
 
-        self.x_train: Optional[ndarray] = None
-        self.x_test: Optional[ndarray] = None
-        self.y_train: Optional[Series] = None
-        self.y_test: Optional[Series] = None
-
-        self.x_train_pre_processed: Optional[ndarray] = None
-        self.x_test_pre_processed: Optional[ndarray] = None
-
     def predict(self) -> ndarray:
         """Predict the target values based on the features.
 
@@ -48,17 +37,11 @@ class LinearRegressionPipeline(BasePipeline):
             features=features, target=target, test_size=0.3
         )
 
-        self.x_train_pre_processed = self.pre_processor.fit_transform(X=self.x_train)
-        self.x_test_pre_processed = self.pre_processor.transform(X=self.x_test)
-
         model = LinearRegression()
 
-        x_train_to_use: ndarray = self.x_train_pre_processed
-        x_test_to_use: ndarray = self.x_test_pre_processed
-
-        if not self.config.has_pre_processing():
-            x_train_to_use = self.x_train
-            x_test_to_use = self.x_test
+        x_train_to_use, x_test_to_use = self.pre_process_data(
+            pre_processor=self.pre_processor, x_train=self.x_train, x_test=self.x_test
+        )
 
         model.fit(X=x_train_to_use, y=self.y_train)
         return model.predict(X=x_test_to_use)

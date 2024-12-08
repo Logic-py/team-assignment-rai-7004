@@ -1,6 +1,7 @@
 """Base Pipeline module."""
 
 from abc import ABC, abstractmethod
+from typing import Optional
 
 from numpy import ndarray
 from pandas import DataFrame, Series
@@ -25,6 +26,14 @@ class BasePipeline(ABC):
 
         """
         self.config = config
+
+        self.x_train: Optional[ndarray] = None
+        self.x_test: Optional[ndarray] = None
+        self.y_train: Optional[Series] = None
+        self.y_test: Optional[Series] = None
+
+        self.x_train_pre_processed: Optional[ndarray] = None
+        self.x_test_pre_processed: Optional[ndarray] = None
 
     def load_data_set(self) -> tuple[DataFrame, Series]:
         """Call load_data function from io module.
@@ -73,6 +82,29 @@ class BasePipeline(ABC):
                 ("scaler_minmax", scaler_minmax, self.config.scale_minmax),
             ]
         )
+
+    def pre_process_data(
+        self, pre_processor: ColumnTransformer, x_train: ndarray, x_test: ndarray
+    ) -> tuple[ndarray, ndarray]:
+        """Preprocessed the data based on the ColumnTransformer.
+
+        Args:
+            pre_processor: ColumnTransformer that specifies scaler types per feature.
+            x_train: ndarray, training data.
+            x_test: ndarray, testing data.
+
+        Returns:
+            The transformed x_train, x_test if a column transformer contains features to transform,
+             else x_train, x_test.
+
+        """
+        self.x_train_pre_processed = pre_processor.fit_transform(X=x_train)
+        self.x_test_pre_processed = pre_processor.transform(X=x_test)
+
+        if not self.config.has_pre_processing():
+            return x_train, x_test
+
+        return self.x_train_pre_processed, self.x_test_pre_processed  # type: ignore[return-value]
 
     @abstractmethod
     def predict(self) -> ndarray:
