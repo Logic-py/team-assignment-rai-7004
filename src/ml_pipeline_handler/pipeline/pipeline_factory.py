@@ -8,9 +8,9 @@ linear regression, classification, and regression using decision trees.
 from ..algorithm import AlgorithmType
 from ..pipeline.base_config import PipelineConfig
 from ..pipeline.base_pipeline import BasePipeline
-from ..pipeline.decision_tree_classifier_pipeline import DecisionTreeClassifierPipeline
-from ..pipeline.decision_tree_regressor_pipeline import DecisionTreeRegressorPipeline
-from ..pipeline.linear_regression_pipeline import LinearRegressionPipeline
+from ..pipeline.classification.decision_tree_classifier_pipeline import DecisionTreeClassifierPipeline
+from ..pipeline.regression.decision_tree_regressor_pipeline import DecisionTreeRegressorPipeline
+from ..pipeline.regression.linear_regression_pipeline import LinearRegressionPipeline
 
 
 class PipelineFactory:
