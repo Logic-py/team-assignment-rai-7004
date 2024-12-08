@@ -42,7 +42,7 @@ class ClassificationMetricHandler(BaseMetricsHandler):
             negative classes.
 
         """
-        return roc_auc_score(y_true=y_true, y_score=y_proba)
+        return roc_auc_score(y_true=y_true, y_score=y_proba[:, 1])
 
     def compute_metrics(
         self, y_true: Series, y_pred: ndarray, y_proba: Optional[ndarray] = None
