@@ -10,11 +10,11 @@ from typing import Optional
 from numpy import ndarray
 from sklearn.tree import DecisionTreeRegressor
 
-from ...metric.base_result import BaseMetricResult
-from ...metric.metric_factory import MetricFactory
-from ...metric.model_type import ModelType
-from ...pipeline.base_config import PipelineConfig
-from ...pipeline.base_pipeline import BasePipeline
+from src.ml_pipeline_handler.metric.base_result import BaseMetricResult
+from src.ml_pipeline_handler.metric.metric_factory import MetricFactory
+from src.ml_pipeline_handler.metric.model_type import ModelType
+from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
+from src.ml_pipeline_handler.pipeline.base_pipeline import BasePipeline
 
 
 class DecisionTreeRegressorPipeline(BasePipeline):

@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 
-from ..algorithm import AlgorithmType
+from src.ml_pipeline_handler.algorithm import AlgorithmType
 
 
 @dataclass

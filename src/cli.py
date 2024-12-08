@@ -4,8 +4,8 @@ import argparse
 
 from loguru import logger
 
-from ml_pipeline_handler.pipeline.base_config import PipelineConfig
-from ml_pipeline_handler.pipeline.pipeline_factory import PipelineFactory
+from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
+from src.ml_pipeline_handler.pipeline.pipeline_factory import PipelineFactory
 
 
 def cli() -> None:
