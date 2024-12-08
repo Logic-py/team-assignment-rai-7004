@@ -46,7 +46,7 @@ class DecisionTreeRegressorPipeline(BasePipeline):
         x_train_to_use, x_test_to_use = self.pre_process_data(x_train=self.x_train, x_test=self.x_test)
 
         self.model.fit(X=x_train_to_use, y=self.y_train)
-        return self.model.predict(X=x_test_to_use)
+        return self.model.predict(X=x_test_to_use), None
 
     def compute_metrics(self, prediction: ndarray, probability: Optional[ndarray] = None) -> BaseMetricResult:
         """Compute the metrics of the given model.
