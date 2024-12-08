@@ -30,9 +30,7 @@ class BasePipeline(ABC):
             tuple[DataFrame, Series] of the features and target.
 
         """
-        return load_data(
-            data_path=self.config.data_path, target_column=self.config.target_column
-        )
+        return load_data(data_path=self.config.data_path, target_column=self.config.target_column)
 
     def create_training_set(
         self, features: DataFrame, target: Series, test_size: float

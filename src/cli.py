@@ -32,18 +32,10 @@ def cli() -> None:
         required=True,
         help="List of features to include in the model (e.g., 'feature1 feature2 feature3')",
     )
-    parser.add_argument(
-        "--target_column", required=True, help="Name of the target column"
-    )
-    parser.add_argument(
-        "--algorithm", required=True, help="Algorithm name (e.g., 'RandomForest')"
-    )
-    parser.add_argument(
-        "--out_file", required=True, help="Where to store the output file"
-    )
-    parser.add_argument(
-        "--random_state", type=int, default=42, help="Random state for reproducibility"
-    )
+    parser.add_argument("--target_column", required=True, help="Name of the target column")
+    parser.add_argument("--algorithm", required=True, help="Algorithm name (e.g., 'RandomForest')")
+    parser.add_argument("--out_file", required=True, help="Where to store the output file")
+    parser.add_argument("--random_state", type=int, default=42, help="Random state for reproducibility")
     parser.add_argument("--num_folds", type=int, default=5, help="Number of CV folds")
 
     args = parser.parse_args()

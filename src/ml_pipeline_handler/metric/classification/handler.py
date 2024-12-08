@@ -60,18 +60,12 @@ class ClassificationMetricHandler(BaseMetricsHandler):
             MetricsResults: A datamodel containing all computed metrics.
 
         """
-        accuracy = ClassificationMetricHandler.compute_accuracy_score(
-            y_true=y_true, y_pred=y_pred
-        )
+        accuracy = ClassificationMetricHandler.compute_accuracy_score(y_true=y_true, y_pred=y_pred)
 
         if y_proba is None:
-            logger.error(
-                "Variable [y_proba] is mandatory in ClassificationMetricHandler"
-            )
+            logger.error("Variable [y_proba] is mandatory in ClassificationMetricHandler")
             raise ValueError
 
-        roc_auc = ClassificationMetricHandler.compute_area_under_curve_score(
-            y_true=y_true, y_proba=y_proba
-        )
+        roc_auc = ClassificationMetricHandler.compute_area_under_curve_score(y_true=y_true, y_proba=y_proba)
 
         return ClassificationMetricResult(accuracy=accuracy, roc_auc=roc_auc)

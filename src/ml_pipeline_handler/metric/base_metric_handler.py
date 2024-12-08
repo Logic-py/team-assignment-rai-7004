@@ -23,9 +23,7 @@ class BaseMetricsHandler(ABC):
         self.model_type = model_type
 
     @abstractmethod
-    def compute_metrics(
-        self, y_true: Series, y_pred: ndarray, y_proba: Optional[ndarray] = None
-    ) -> BaseMetricResult:
+    def compute_metrics(self, y_true: Series, y_pred: ndarray, y_proba: Optional[ndarray] = None) -> BaseMetricResult:
         """Compute all relevant metrics for a given task and return them in a structured datamodel.
 
         Args:

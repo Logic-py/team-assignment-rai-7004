@@ -30,9 +30,7 @@ class DecisionTreeRegressorPipeline(BasePipeline):
         """
         super().__init__(config=config)
         self.model = DecisionTreeRegressor(random_state=config.random_state)
-        self.metric_handler = MetricFactory.get_metrics_handler(
-            model_type=ModelType.REGRESSION
-        )
+        self.metric_handler = MetricFactory.get_metrics_handler(model_type=ModelType.REGRESSION)
 
         self.x_train: Optional[ndarray] = None
         self.x_test: Optional[ndarray] = None
@@ -64,6 +62,4 @@ class DecisionTreeRegressorPipeline(BasePipeline):
             BaseMetricResult, containing metric information.
 
         """
-        return self.metric_handler.compute_metrics(
-            y_true=self.y_test, y_pred=prediction
-        )
+        return self.metric_handler.compute_metrics(y_true=self.y_test, y_pred=prediction)

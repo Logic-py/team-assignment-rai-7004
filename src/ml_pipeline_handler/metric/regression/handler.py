@@ -73,15 +73,7 @@ class RegressionMetricHandler(BaseMetricsHandler):
 
         """
         del y_proba  # Argument is not used by Regression.
-        mae = RegressionMetricHandler.compute_mean_absolute_error(
-            y_true=y_true, y_pred=y_pred
-        )
-        mse = RegressionMetricHandler.compute_mean_squared_error(
-            y_true=y_true, y_pred=y_pred
-        )
-        r_square = RegressionMetricHandler.compute_r_square_score(
-            y_true=y_true, y_pred=y_pred
-        )
-        return RegressionMetricResult(
-            mean_absolute_error=mae, mean_squared_error=mse, r_square=r_square
-        )
+        mae = RegressionMetricHandler.compute_mean_absolute_error(y_true=y_true, y_pred=y_pred)
+        mse = RegressionMetricHandler.compute_mean_squared_error(y_true=y_true, y_pred=y_pred)
+        r_square = RegressionMetricHandler.compute_r_square_score(y_true=y_true, y_pred=y_pred)
+        return RegressionMetricResult(mean_absolute_error=mae, mean_squared_error=mse, r_square=r_square)

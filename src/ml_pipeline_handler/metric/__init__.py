@@ -1,6 +1,6 @@
 """Initialization module for metrics.
 
-This package includes handlers, results, and utilities for metrics 
+This package includes handlers, results, and utilities for metrics
 computation in classification and regression models.
 """
 
