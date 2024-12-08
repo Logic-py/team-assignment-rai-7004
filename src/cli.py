@@ -67,8 +67,7 @@ def cli() -> None:
     metrics = pipeline.compute_metrics(prediction=prediction)
     logger.info(f"Metrics: {metrics}")
 
-    # TODO: from src.io.saver import save_data
-    # save_model(pipeline, "model.pkl")
+    # TODO: from src.io.saver import save_data -> save_model(pipeline, "model.pkl")
 
     logger.info("[END] CLI")
 

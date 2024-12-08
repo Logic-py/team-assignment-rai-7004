@@ -2,6 +2,7 @@ from src.ml_pipeline_handler.pipeline.pipeline_factory import PipelineFactory
 from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
 from src.ml_pipeline_handler.algorithm import AlgorithmType
 
+
 def test_decision_tree_classifier_pipeline():
     config = PipelineConfig(
         data_path="data/test_data.csv",
@@ -14,6 +15,7 @@ def test_decision_tree_classifier_pipeline():
     )
     pipeline = PipelineFactory.build_pipeline(config=config)
     assert pipeline is not None
+
 
 def test_decision_tree_regressor_pipeline():
     config = PipelineConfig(
