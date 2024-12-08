@@ -1,1 +1,1 @@
-"""Regression Metrics Module."""
+"""Metrics Module."""

@@ -3,12 +3,12 @@
 import numpy as np
 import pytest
 
-from src.ml_pipeline_handler.metric import BaseMetricsHandler
+from src.ml_pipeline_handler.metric.base_metric_handler import BaseMetricsHandler
 from src.ml_pipeline_handler.metric.classification.handler import ClassificationMetricHandler
-from src.ml_pipeline_handler.metric import ClassificationMetricResult
-from src.ml_pipeline_handler.metric import MetricFactory
-from src.ml_pipeline_handler.metric import ModelType
-from src.ml_pipeline_handler.metric import RegressionMetricHandler
+from src.ml_pipeline_handler.metric.classification.result import ClassificationMetricResult
+from src.ml_pipeline_handler.metric.metric_factory import MetricFactory
+from src.ml_pipeline_handler.metric.model_type import ModelType
+from src.ml_pipeline_handler.metric.regression.handler import RegressionMetricHandler
 from src.ml_pipeline_handler.metric.regression.result import RegressionMetricResult
 
 
@@ -79,7 +79,9 @@ def test_compute_classification_metrics() -> None:
     """
     handler = ClassificationMetricHandler(model_type=ModelType.CLASSIFICATION)
     result = handler.compute_metrics(
-        y_true=classification_y_true, y_pred=classification_y_pred, y_proba=classification_y_proba
+        y_true=classification_y_true,
+        y_pred=classification_y_pred,
+        y_proba=classification_y_proba,
     )
     assert isinstance(
         result, ClassificationMetricResult
