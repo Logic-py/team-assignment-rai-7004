@@ -1,6 +1,6 @@
-from src.ml_pipeline_handler.pipeline.pipeline_factory import PipelineFactory
-from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
 from src.ml_pipeline_handler.algorithm import AlgorithmType
+from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
+from src.ml_pipeline_handler.pipeline.pipeline_factory import PipelineFactory
 
 
 def test_decision_tree_classifier_pipeline():

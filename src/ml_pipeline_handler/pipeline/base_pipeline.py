@@ -1,10 +1,14 @@
 """Base Pipeline module."""
 
 from abc import ABC, abstractmethod
+from typing import Optional
 
 from numpy import ndarray
 from pandas import DataFrame, Series
+from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import MinMaxScaler, RobustScaler, StandardScaler
 
 from ..io.loader import load_data
 from ..metric.base_result import BaseMetricResult
@@ -22,6 +26,14 @@ class BasePipeline(ABC):
 
         """
         self.config = config
+
+        self.x_train: Optional[ndarray] = None
+        self.x_test: Optional[ndarray] = None
+        self.y_train: Optional[Series] = None
+        self.y_test: Optional[Series] = None
+
+        self.x_train_pre_processed: Optional[ndarray] = None
+        self.x_test_pre_processed: Optional[ndarray] = None
 
     def load_data_set(self) -> tuple[DataFrame, Series]:
         """Call load_data function from io module.
@@ -52,8 +64,49 @@ class BasePipeline(ABC):
         )
         return x_train, x_test, y_train, y_test
 
+    def get_pre_processor(self) -> ColumnTransformer:
+        """Assemble and return a ColumnTransformer based on the pipeline config.
+
+        Returns:
+            ColumnTransformer to transform the data.
+
+        """
+        scaler_standard = Pipeline(steps=[("scaler_standard", StandardScaler())])
+        scaler_robust = Pipeline(steps=[("scaler_robust", RobustScaler())])
+        scaler_minmax = Pipeline(steps=[("scaler_minmax", MinMaxScaler())])
+
+        return ColumnTransformer(
+            transformers=[
+                ("scaler_standard", scaler_standard, self.config.scale_standard),
+                ("scaler_robust", scaler_robust, self.config.scale_robust),
+                ("scaler_minmax", scaler_minmax, self.config.scale_minmax),
+            ]
+        )
+
+    def pre_process_data(self, x_train: ndarray, x_test: ndarray) -> tuple[ndarray, ndarray]:
+        """Preprocessed the data based on the ColumnTransformer.
+
+        Args:
+            x_train: ndarray, training data.
+            x_test: ndarray, testing data.
+
+        Returns:
+            The transformed x_train, x_test if a column transformer contains features to transform,
+             else x_train, x_test.
+
+        """
+        pre_processor = self.get_pre_processor()
+
+        self.x_train_pre_processed = pre_processor.fit_transform(X=x_train)
+        self.x_test_pre_processed = pre_processor.transform(X=x_test)
+
+        if not self.config.has_pre_processing():
+            return x_train, x_test
+
+        return self.x_train_pre_processed, self.x_test_pre_processed  # type: ignore[return-value]
+
     @abstractmethod
-    def predict(self) -> ndarray:
+    def predict(self) -> tuple[ndarray, Optional[ndarray]]:
         """Predict the target values based on the features.
 
         Returns:
@@ -62,11 +115,12 @@ class BasePipeline(ABC):
         """
 
     @abstractmethod
-    def compute_metrics(self, prediction: ndarray) -> BaseMetricResult:
+    def compute_metrics(self, prediction: ndarray, probability: Optional[ndarray] = None) -> BaseMetricResult:
         """Compute the metrics of the given model.
 
         Args:
             prediction: ndarray, the prediction of the model.
+            probability: Optional[ndarray], used for probability in classification models.
 
         Returns:
             BaseMetricResult, containing metric information.
