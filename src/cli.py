@@ -12,9 +12,9 @@ def cli() -> None:
     """CLI wrapper for the main application.
 
     Example usage:
-        python src/cli.py --data_path=src/data/housing.csv --features "OverallQual" "GrLivArea" "GarageCars"
-         "GarageArea" "TotalBsmtSF" --target_column=SalePrice --algorithm=linear_regression --random_state=42
-          --num_folds=5 --out_file=whatever.pkl
+    python src/cli.py --data_path=src/data/housing.csv --features "OverallQual" "GrLivArea" "GarageCars" "GarageArea"
+     "TotalBsmtSF" --target_column=SalePrice --algorithm=linear_regression --random_state=42 --num_folds=5
+      --out_file=whatever.pkl --scale_robust "GrLivArea" "TotalBsmtSF"
 
     Returns:
         None
@@ -33,6 +33,20 @@ def cli() -> None:
         help="List of features to include in the model (e.g., 'feature1 feature2 feature3')",
     )
     parser.add_argument("--target_column", required=True, help="Name of the target column")
+    parser.add_argument(
+        "--scale_robust",
+        nargs="+",
+        required=False,
+        default=[],
+        help="List of features to scale using RobustScaler (e.g., 'feature1 feature2 feature3')",
+    )
+    parser.add_argument(
+        "--scale_minmax",
+        nargs="+",
+        required=False,
+        default=[],
+        help="List of features to scale using RobustScaler (e.g., 'feature1 feature2 feature3')",
+    )
     parser.add_argument("--algorithm", required=True, help="Algorithm name (e.g., 'RandomForest')")
     parser.add_argument("--out_file", required=True, help="Where to store the output file")
     parser.add_argument("--random_state", type=int, default=42, help="Random state for reproducibility")
@@ -59,6 +73,9 @@ def cli() -> None:
         out_file=args.out_file,
         random_state=args.random_state,
         num_folds=args.num_folds,
+        scale_standard=args.scale_standard,
+        scale_robust=args.scale_robust,
+        scale_minmax=args.scale_minmax,
     )
 
     pipeline = PipelineFactory.build_pipeline(config=pipeline_config)

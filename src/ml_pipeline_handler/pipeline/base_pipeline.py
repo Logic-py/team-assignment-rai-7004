@@ -4,7 +4,10 @@ from abc import ABC, abstractmethod
 
 from numpy import ndarray
 from pandas import DataFrame, Series
+from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import MinMaxScaler, RobustScaler, StandardScaler
 
 from ..io.loader import load_data
 from ..metric.base_result import BaseMetricResult
@@ -51,6 +54,25 @@ class BasePipeline(ABC):
             features, target, test_size=test_size, random_state=self.config.random_state
         )
         return x_train, x_test, y_train, y_test
+
+    def get_pre_processor(self) -> ColumnTransformer:
+        """Assemble and return a ColumnTransformer based on the pipeline config.
+
+        Returns:
+            ColumnTransformer to transform the data.
+
+        """
+        scaler_standard = Pipeline(steps=[("scaler", StandardScaler())])
+        scaler_robust = Pipeline(steps=[("scaler", RobustScaler())])
+        scaler_minmax = Pipeline(steps=[("scaler", MinMaxScaler())])
+
+        return ColumnTransformer(
+            transformers=[
+                ("scaler_standard", scaler_standard, self.config.scale_standard),
+                ("scaler_robust", scaler_robust, self.config.scale_robust),
+                ("scaler_minmax", scaler_minmax, self.config.scale_minmax),
+            ]
+        )
 
     @abstractmethod
     def predict(self) -> ndarray:

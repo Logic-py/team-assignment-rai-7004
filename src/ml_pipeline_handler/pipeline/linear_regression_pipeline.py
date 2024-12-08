@@ -26,11 +26,15 @@ class LinearRegressionPipeline(BasePipeline):
         super().__init__(config=config)
         self.model = LinearRegression()
         self.metric_handler = MetricFactory.get_metrics_handler(model_type=ModelType.REGRESSION)
+        self.pre_processor = self.get_pre_processor()
 
         self.x_train: Optional[ndarray] = None
         self.x_test: Optional[ndarray] = None
         self.y_train: Optional[Series] = None
         self.y_test: Optional[Series] = None
+
+        self.x_train_pre_processed: Optional[ndarray] = None
+        self.x_test_pre_processed: Optional[ndarray] = None
 
     def predict(self) -> ndarray:
         """Predict the target values based on the features.
@@ -44,9 +48,12 @@ class LinearRegressionPipeline(BasePipeline):
             features=features, target=target, test_size=0.3
         )
 
+        self.x_train_pre_processed = self.pre_processor.fit_transform(X=self.x_train)
+        self.x_test_pre_processed = self.pre_processor.transform(X=self.x_test)
+
         model = LinearRegression()
-        model.fit(X=self.x_train, y=self.y_train)
-        return model.predict(X=self.x_test)
+        model.fit(X=self.x_train_pre_processed, y=self.y_train)
+        return model.predict(X=self.x_test_pre_processed)
 
     def compute_metrics(self, prediction: ndarray) -> BaseMetricResult:
         """Compute the metrics of the given model.
