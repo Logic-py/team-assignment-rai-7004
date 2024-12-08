@@ -1,5 +1,7 @@
 """Linear Regression Module."""
 
+from typing import Optional
+
 from numpy import ndarray
 from sklearn.linear_model import LinearRegression
 
@@ -25,7 +27,7 @@ class LinearRegressionPipeline(BasePipeline):
         self.metric_handler = MetricFactory.get_metrics_handler(model_type=ModelType.REGRESSION)
         self.pre_processor = self.get_pre_processor()
 
-    def predict(self) -> ndarray:
+    def predict(self) -> tuple[ndarray, Optional[ndarray]]:
         """Predict the target values based on the features.
 
         Returns:
@@ -42,14 +44,15 @@ class LinearRegressionPipeline(BasePipeline):
         self.model.fit(X=x_train_to_use, y=self.y_train)
         return self.model.predict(X=x_test_to_use)
 
-    def compute_metrics(self, prediction: ndarray) -> BaseMetricResult:
+    def compute_metrics(self, prediction: ndarray, probability: Optional[ndarray] = None) -> BaseMetricResult:
         """Compute the metrics of the given model.
 
         Args:
             prediction: ndarray, the prediction of the model.
+            probability: Optional[ndarray], used for probability in classification models.
 
         Returns:
             BaseMetricResult, containing metric information.
 
         """
-        return self.metric_handler.compute_metrics(y_true=self.y_test, y_pred=prediction)
+        return self.metric_handler.compute_metrics(y_true=self.y_test, y_pred=prediction, y_proba=probability)

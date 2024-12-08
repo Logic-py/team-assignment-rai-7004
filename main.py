@@ -57,9 +57,9 @@ def main(
     )
 
     pipeline = PipelineFactory.build_pipeline(config=pipeline_config)
-    prediction = pipeline.predict()
+    prediction, probability = pipeline.predict()
 
-    metrics = pipeline.compute_metrics(prediction=prediction)
+    metrics = pipeline.compute_metrics(prediction=prediction, probability=probability)
     logger.info(f"Metrics: {metrics}")
 
     # TODO: from src.io.saver import save_data # save_model(pipeline, "model.pkl")

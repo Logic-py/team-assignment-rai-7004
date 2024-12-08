@@ -106,7 +106,7 @@ class BasePipeline(ABC):
         return self.x_train_pre_processed, self.x_test_pre_processed  # type: ignore[return-value]
 
     @abstractmethod
-    def predict(self) -> ndarray:
+    def predict(self) -> tuple[ndarray, Optional[ndarray]]:
         """Predict the target values based on the features.
 
         Returns:
@@ -115,11 +115,12 @@ class BasePipeline(ABC):
         """
 
     @abstractmethod
-    def compute_metrics(self, prediction: ndarray) -> BaseMetricResult:
+    def compute_metrics(self, prediction: ndarray, probability: Optional[ndarray] = None) -> BaseMetricResult:
         """Compute the metrics of the given model.
 
         Args:
             prediction: ndarray, the prediction of the model.
+            probability: Optional[ndarray], used for probability in classification models.
 
         Returns:
             BaseMetricResult, containing metric information.
