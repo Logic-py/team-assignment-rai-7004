@@ -52,8 +52,16 @@ class LinearRegressionPipeline(BasePipeline):
         self.x_test_pre_processed = self.pre_processor.transform(X=self.x_test)
 
         model = LinearRegression()
-        model.fit(X=self.x_train_pre_processed, y=self.y_train)
-        return model.predict(X=self.x_test_pre_processed)
+
+        x_train_to_use: ndarray = self.x_train_pre_processed
+        x_test_to_use: ndarray = self.x_test_pre_processed
+
+        if not self.config.has_pre_processing():
+            x_train_to_use: ndarray = self.x_train
+            x_test_to_use: ndarray = self.x_test
+
+        model.fit(X=x_train_to_use, y=self.y_train)
+        return model.predict(X=x_test_to_use)
 
     def compute_metrics(self, prediction: ndarray) -> BaseMetricResult:
         """Compute the metrics of the given model.

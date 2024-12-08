@@ -62,9 +62,9 @@ class BasePipeline(ABC):
             ColumnTransformer to transform the data.
 
         """
-        scaler_standard = Pipeline(steps=[("scaler", StandardScaler())])
-        scaler_robust = Pipeline(steps=[("scaler", RobustScaler())])
-        scaler_minmax = Pipeline(steps=[("scaler", MinMaxScaler())])
+        scaler_standard = Pipeline(steps=[("scaler_standard", StandardScaler())])
+        scaler_robust = Pipeline(steps=[("scaler_robust", RobustScaler())])
+        scaler_minmax = Pipeline(steps=[("scaler_minmax", MinMaxScaler())])
 
         return ColumnTransformer(
             transformers=[

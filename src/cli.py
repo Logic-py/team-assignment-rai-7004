@@ -14,7 +14,11 @@ def cli() -> None:
     Example usage:
     python src/cli.py --data_path=src/data/housing.csv --features "OverallQual" "GrLivArea" "GarageCars" "GarageArea"
      "TotalBsmtSF" --target_column=SalePrice --algorithm=linear_regression --random_state=42 --num_folds=5
-      --out_file=whatever.pkl --scale_robust "GrLivArea" "TotalBsmtSF"
+     --out_file=whatever.pkl --scale_robust "GrLivArea" "TotalBsmtSF"
+
+    python src/cli.py --data_path=src/data/housing.csv --features "OverallQual" "GrLivArea" "GarageCars" "GarageArea"
+     "TotalBsmtSF" --target_column=SalePrice --algorithm=linear_regression --random_state=42 --num_folds=5
+      --out_file=whatever.pkl
 
     Returns:
         None
@@ -34,6 +38,13 @@ def cli() -> None:
     )
     parser.add_argument("--target_column", required=True, help="Name of the target column")
     parser.add_argument(
+        "--scale_standard",
+        nargs="+",
+        required=False,
+        default=[],
+        help="List of features to scale using StandardScaler (e.g., 'feature1 feature2 feature3')",
+    )
+    parser.add_argument(
         "--scale_robust",
         nargs="+",
         required=False,
@@ -45,7 +56,7 @@ def cli() -> None:
         nargs="+",
         required=False,
         default=[],
-        help="List of features to scale using RobustScaler (e.g., 'feature1 feature2 feature3')",
+        help="List of features to scale using MinMaxScaler (e.g., 'feature1 feature2 feature3')",
     )
     parser.add_argument("--algorithm", required=True, help="Algorithm name (e.g., 'RandomForest')")
     parser.add_argument("--out_file", required=True, help="Where to store the output file")
@@ -55,14 +66,10 @@ def cli() -> None:
     args = parser.parse_args()
 
     logger.info(
-        "Starting Main function with: %s, %s, %s, %s, %s, %s, %s",
-        args.data_path,
-        args.features,
-        args.target_column,
-        args.algorithm,
-        args.out_file,
-        args.random_state,
-        args.num_folds,
+        f"Starting Main function with: [data_path]: {args.data_path}, [features]: {args.features}, [target_column]: "
+        f"{args.target_column}, [scale_standard]: {args.scale_standard}, [scale_robust]: {args.scale_robust}, "
+        f"[scale_minmax]: {args.scale_minmax}, [algorithm]: {args.algorithm}, [out_file]: {args.out_file}, "
+        f"[random_state]: {args.random_state}, [num_folds]: {args.num_folds}"
     )
 
     pipeline_config = PipelineConfig(

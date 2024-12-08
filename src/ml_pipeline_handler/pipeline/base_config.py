@@ -19,3 +19,12 @@ class PipelineConfig:
     scale_standard: list[str] = field(default_factory=list)
     scale_robust: list[str] = field(default_factory=list)
     scale_minmax: list[str] = field(default_factory=list)
+
+    def has_pre_processing(self) -> bool:
+        """Check whether the pipeline config contains pre_processing.
+
+        Returns:
+            Boolean representing the presence of preprocessing.
+
+        """
+        return any([self.scale_standard, self.scale_robust, self.scale_minmax])
