@@ -6,8 +6,8 @@ from src.ml_pipeline_handler.pipeline.pipeline_factory import PipelineFactory
 def test_random_forest_pipeline():
     config = PipelineConfig(
         data_path="data/test_data.csv",
-        features=["feature1", "feature2"],
-        target_column="target",
+        features=["SepalLengthCm", "SepalWidthCm","PetalLengthCm","PetalWidthCm"],
+        target_column="Species",
         algorithm=AlgorithmType.RANDOM_FOREST,
         out_file="models/random_forest_classifier.pkl",
         random_state=42,
