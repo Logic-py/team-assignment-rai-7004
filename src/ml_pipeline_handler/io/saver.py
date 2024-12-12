@@ -16,5 +16,5 @@ def save_model(model: BasePipeline, file_name: str) -> None:
         None
 
     """
-    with open(file_name, "w") as f:
+    with open(file_name, "wb") as f:
         pickle.dump(model, f)
