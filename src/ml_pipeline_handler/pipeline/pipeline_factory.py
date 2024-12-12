@@ -13,15 +13,17 @@ from src.ml_pipeline_handler.pipeline.classification.decision_tree_classifier_pi
     DecisionTreeClassifierPipeline,
 )
 from src.ml_pipeline_handler.pipeline.classification.logistic_regression_classifier_pipeline import (
-   LogisticRegressionClassifierPipeline,
+    LogisticRegressionClassifierPipeline,
 )
 from src.ml_pipeline_handler.pipeline.classification.random_forest_pipeline import (
     RandomForestClassifierPipeline,
 )
-
-
-from src.ml_pipeline_handler.pipeline.regression.decision_tree_regressor_pipeline import DecisionTreeRegressorPipeline
-from src.ml_pipeline_handler.pipeline.regression.linear_regression_pipeline import LinearRegressionPipeline
+from src.ml_pipeline_handler.pipeline.regression.decision_tree_regressor_pipeline import (
+    DecisionTreeRegressorPipeline,
+)
+from src.ml_pipeline_handler.pipeline.regression.linear_regression_pipeline import (
+    LinearRegressionPipeline,
+)
 
 
 class PipelineFactory:
@@ -45,9 +47,9 @@ class PipelineFactory:
             return LinearRegressionPipeline(config=config)
         if config.algorithm == AlgorithmType.DECISION_TREE_CLASSIFIER:
             return DecisionTreeClassifierPipeline(config=config)
-	if config.algorithm == AlgorithmType.RANDOM_FOREST:
+        if config.algorithm == AlgorithmType.RANDOM_FOREST:
             return RandomForestClassifierPipeline(config=config)
-	if config.algorithm == AlgorithmType.LOGISTIC_REGRESSION:
+        if config.algorithm == AlgorithmType.LOGISTIC_REGRESSION:
             return LogisticRegressionClassifierPipeline(config=config)
         if config.algorithm == AlgorithmType.DECISION_TREE_REGRESSOR:
             return DecisionTreeRegressorPipeline(config=config)
