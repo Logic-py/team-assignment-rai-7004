@@ -1,11 +1,7 @@
 """Data Saver Module."""
+import pickle
 
-
-def save_data() -> None:
-    """TODO. @Tim implement the pickle saving here.
-    @Loic sure thing broski. Also, look, I understand Git now :D
-
-    Returns:
-        TODO
-
-    """
+def save_model(model, file_name) -> None:
+    with open(file_name+'.pkl', 'wb') as f:
+        pickle.dump(model, f)
+    return None
