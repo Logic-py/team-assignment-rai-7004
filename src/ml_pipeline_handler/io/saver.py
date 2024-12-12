@@ -1,5 +1,7 @@
 """Data Saver Module."""
+
 import pickle
+
 
 def save_model(model, file_name) -> None:
     """Save the model as a pickle file.
