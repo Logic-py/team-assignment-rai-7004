@@ -2,6 +2,9 @@ from src.ml_pipeline_handler.algorithm import AlgorithmType
 from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
 from src.ml_pipeline_handler.pipeline.pipeline_factory import PipelineFactory
 
+# Have been replaced - data_path="data/test_data.csv",
+# Have been replaced - features=["feature1", "feature2"],
+# Have been replaced - target_column="target",
 
 def test_logistic_regression_classifier_pipeline():
     config = PipelineConfig(
