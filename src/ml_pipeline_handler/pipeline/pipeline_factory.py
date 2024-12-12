@@ -2,7 +2,8 @@
 
 This module implements a factory class for constructing specific pipelines
 based on the provided configuration. The pipelines support algorithms such as
-linear regression, classification, and regression using decision trees.
+linear regression, classification(logistic regression and random forest), and 
+regression using decision trees.
 """
 
 from src.ml_pipeline_handler.algorithm import AlgorithmType
