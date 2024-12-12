@@ -1,7 +1,6 @@
 """Data Saver Module."""
 
 import pickle
-
 from src.ml_pipeline_handler.pipeline.base_pipeline import BasePipeline
 
 
