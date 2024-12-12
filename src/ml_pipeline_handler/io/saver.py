@@ -1,6 +1,7 @@
 """Data Saver Module."""
 
 import pickle
+
 from src.ml_pipeline_handler.pipeline.base_pipeline import BasePipeline
 
 
@@ -15,5 +16,5 @@ def save_model(model: BasePipeline, file_name: str) -> None:
         None
 
     """
-    with open(file_name, "wb") as f:
+    with open(file_name, "w") as f:
         pickle.dump(model, f)
