@@ -5,12 +5,11 @@ A Configurable Machine Learning Pipeline
 1. [Introduction](#introduction)
 2. [Project Overview](#project-overview)
 3. [Features](#features)
-4. [Installation](#installation)
-5. [Configuration](#configuration)
-6. [Usage](#usage)
-7. [Pipeline Details](#pipeline-details)
-8. [Testing](#testing)
-9. [License](#license)
+4. [Configuration](#configuration)
+5. [Usage](#usage)
+6. [Pipeline Details](#pipeline-details)
+7. [Testing](#testing)
+8. [License](#license)
 
 ---
 
@@ -66,21 +65,6 @@ The metrics module located in `ml_pipeline_handler/metric` provides tools for ev
 - **Cross-Validation**: Configurable k-fold cross-validation for robust model evaluation.
 - **Logging**: Detailed logging using `loguru` for improved traceability.
 - **Pipeline Outputs**: Saves trained pipelines/models for later use.
-
-## Installation
-1. Clone the repository:
-   ```bash
-   git clone <repo-url>
-   cd <repo-folder>
-   ```
-2. Install dependencies using Poetry:
-   ```bash
-   poetry install
-   ```
-   Alternatively, using `pip`:
-   ```bash
-   pip install -r requirements.txt
-   ```
 
 ## Configuration
 ### Parameters
