@@ -2,8 +2,10 @@
 
 import pickle
 
+from src.ml_pipeline_handler.pipeline.base_pipeline import BasePipeline
 
-def save_model(model, file_name) -> None:
+
+def save_model(model: BasePipeline, file_name: str) -> None:
     """Save the model as a pickle file.
 
     Args:
