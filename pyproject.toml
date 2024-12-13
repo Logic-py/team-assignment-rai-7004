@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "team-assignment-rai-7004"
-version = "0.0.1"
+version = "1.0.0"
 description = "Team Assignment RAI-7004"
 authors = ["Loïc Motheu <lmotheu@gmail.com>"]
 readme = "README.md"

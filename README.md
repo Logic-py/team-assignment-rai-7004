@@ -169,6 +169,20 @@ The pipeline includes the following stages:
 4. **Model Saving**:
     - Saves the trained pipeline to the specified output file.
 
+## Installation
+
+To install either use poetry and run:
+
+```bash
+poetry install
+```
+
+Or via PIP:
+
+```bash
+pip install -r requirements.txt
+```
+
 ## Testing
 
 To run tests:
