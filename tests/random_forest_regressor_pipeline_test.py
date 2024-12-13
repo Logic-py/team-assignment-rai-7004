@@ -11,7 +11,6 @@ def test_random_forest_regressor_pipeline():
         algorithm=AlgorithmType.RANDOM_FOREST_REGRESSOR,
         out_file="models/random_forest_regressor.pkl",
         random_state=42,
-        num_folds=5,
     )
     pipeline = PipelineFactory.build_pipeline(config=config)
     assert pipeline is not None

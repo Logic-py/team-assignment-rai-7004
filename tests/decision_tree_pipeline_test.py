@@ -11,7 +11,6 @@ def test_decision_tree_classifier_pipeline():
         algorithm=AlgorithmType.DECISION_TREE_CLASSIFIER,
         out_file="models/decision_tree_classifier.pkl",
         random_state=42,
-        num_folds=5,
     )
     pipeline = PipelineFactory.build_pipeline(config=config)
     assert pipeline is not None
@@ -25,7 +24,6 @@ def test_decision_tree_regressor_pipeline():
         algorithm=AlgorithmType.DECISION_TREE_REGRESSOR,
         out_file="models/decision_tree_regressor.pkl",
         random_state=42,
-        num_folds=5,
     )
     pipeline = PipelineFactory.build_pipeline(config=config)
     assert pipeline is not None

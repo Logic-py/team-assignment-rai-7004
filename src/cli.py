@@ -14,12 +14,11 @@ def cli() -> None:
 
     Example usage:
     python src/cli.py --data_path=src/data/housing.csv --features "OverallQual" "GrLivArea" "GarageCars" "GarageArea"
-     "TotalBsmtSF" --target_column=SalePrice --algorithm=linear_regression --random_state=42 --num_folds=5
-     --out_file=whatever.pkl --scale_robust "GrLivArea" "TotalBsmtSF"
+     "TotalBsmtSF" --target_column=SalePrice --algorithm=linear_regression --random_state=42 --out_file=whatever.pkl
+      --scale_robust "GrLivArea" "TotalBsmtSF"
 
     python src/cli.py --data_path=src/data/housing.csv --features "OverallQual" "GrLivArea" "GarageCars" "GarageArea"
-     "TotalBsmtSF" --target_column=SalePrice --algorithm=linear_regression --random_state=42 --num_folds=5
-      --out_file=whatever.pkl
+     "TotalBsmtSF" --target_column=SalePrice --algorithm=linear_regression --random_state=42 --out_file=whatever.pkl
 
     Returns:
         None
@@ -62,7 +61,6 @@ def cli() -> None:
     parser.add_argument("--algorithm", required=True, help="Algorithm name (e.g., 'RandomForest')")
     parser.add_argument("--out_file", required=True, help="Where to store the output file")
     parser.add_argument("--random_state", type=int, default=42, help="Random state for reproducibility")
-    parser.add_argument("--num_folds", type=int, default=5, help="Number of CV folds")
 
     args = parser.parse_args()
 
@@ -70,7 +68,7 @@ def cli() -> None:
         f"Starting Main function with: [data_path]: {args.data_path}, [features]: {args.features}, [target_column]: "
         f"{args.target_column}, [scale_standard]: {args.scale_standard}, [scale_robust]: {args.scale_robust}, "
         f"[scale_minmax]: {args.scale_minmax}, [algorithm]: {args.algorithm}, [out_file]: {args.out_file}, "
-        f"[random_state]: {args.random_state}, [num_folds]: {args.num_folds}"
+        f"[random_state]: {args.random_state}"
     )
 
     pipeline_config = PipelineConfig(
@@ -80,7 +78,6 @@ def cli() -> None:
         algorithm=args.algorithm,
         out_file=args.out_file,
         random_state=args.random_state,
-        num_folds=args.num_folds,
         scale_standard=args.scale_standard,
         scale_robust=args.scale_robust,
         scale_minmax=args.scale_minmax,
