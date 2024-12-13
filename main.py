@@ -16,7 +16,6 @@ def main(
     algorithm: AlgorithmType,
     out_file: str,
     random_state: int = 42,
-    num_folds: int = 5,
 ) -> None:
     """Entry point for the ML pipeline application.
 
@@ -30,7 +29,6 @@ def main(
         algorithm: str, Name of the ML algorithm.
         out_file: str, Name of the outfile for model pipelines.
         random_state: int, Random seed for reproducibility.
-        num_folds: int, Number of cross-validation folds.
 
     Returns:
         None
@@ -40,7 +38,7 @@ def main(
         f"Starting Main function with: [data_path]: {data_path}, [features]: {features}, [target_column]: "
         f"{target_column}, [scale_standard]: {scale_standard}, [scale_robust]: {scale_robust}, "
         f"[scale_minmax]: {scale_minmax}, [algorithm]: {algorithm}, [out_file]: {out_file}, "
-        f"[random_state]: {random_state}, [num_folds]: {num_folds}"
+        f"[random_state]: {random_state}"
     )
 
     pipeline_config = PipelineConfig(
@@ -50,7 +48,6 @@ def main(
         algorithm=algorithm,
         out_file=out_file,
         random_state=random_state,
-        num_folds=num_folds,
         scale_standard=scale_standard,
         scale_robust=scale_robust,
         scale_minmax=scale_minmax,
@@ -79,7 +76,6 @@ if __name__ == "__main__":
         algorithm=AlgorithmType.LINEAR_REGRESSION,
         out_file="",
         random_state=42,
-        num_folds=5,
         scale_standard=[],
         scale_robust=[],
         scale_minmax=[],

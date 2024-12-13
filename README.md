@@ -166,9 +166,7 @@ The pipeline includes the following stages:
     - Scaling using Standard, Robust, or MinMax scalers.
 3. **Model Training**:
     - Supports configurable ML algorithms.
-4. **Cross-Validation**:
-    - k-fold cross-validation for evaluation.
-5. **Model Saving**:
+4. **Model Saving**:
     - Saves the trained pipeline to the specified output file.
 
 ## Testing
