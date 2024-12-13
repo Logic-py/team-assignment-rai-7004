@@ -16,7 +16,7 @@ from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
 from src.ml_pipeline_handler.pipeline.base_pipeline import BasePipeline
 
 
-class LogisticRegressionClassifierPipeline(BasePipeline):
+class LogisticRegressionPipeline(BasePipeline):
     """Logistic Regression Pipeline Class."""
 
     def __init__(self, config: PipelineConfig) -> None:
