@@ -11,7 +11,8 @@ A Configurable Machine Learning Pipeline
 5. [Usage](#usage)
 6. [Pipeline Details](#pipeline-details)
 7. [Testing](#testing)
-8. [License](#license)
+8. [Installation](#installation)
+9. [License](#license)
 
 ---
 
