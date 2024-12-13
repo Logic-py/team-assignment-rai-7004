@@ -13,6 +13,7 @@ from src.ml_pipeline_handler.pipeline.classification.decision_tree_classifier_pi
 )
 from src.ml_pipeline_handler.pipeline.regression.decision_tree_regressor_pipeline import DecisionTreeRegressorPipeline
 from src.ml_pipeline_handler.pipeline.regression.linear_regression_pipeline import LinearRegressionPipeline
+from src.ml_pipeline_handler.pipeline.regression.random_forest_regressor_pipeline import RandomForestRegressorPipeline
 
 
 class PipelineFactory:
@@ -38,5 +39,7 @@ class PipelineFactory:
             return DecisionTreeClassifierPipeline(config=config)
         if config.algorithm == AlgorithmType.DECISION_TREE_REGRESSOR:
             return DecisionTreeRegressorPipeline(config=config)
+        if config.algorithm == AlgorithmType.RANDOM_FOREST_REGRESSOR:
+            return RandomForestRegressorPipeline(config=config)
 
         raise NotImplementedError(f"Algorithm '{config.algorithm}' is not implemented.")
