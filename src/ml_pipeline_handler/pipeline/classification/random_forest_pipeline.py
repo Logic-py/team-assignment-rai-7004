@@ -6,6 +6,7 @@ computation for classification tasks.
 """
 
 from typing import Optional
+
 from numpy import ndarray
 from sklearn.ensemble import RandomForestClassifier
 
@@ -24,6 +25,7 @@ class RandomForestClassifierPipeline(BasePipeline):
 
         Args:
             config: PipelineConfig, contains configuration information for a pipeline.
+
         """
         super().__init__(config=config)
         self.model = RandomForestClassifier(random_state=config.random_state, n_jobs=-1)
@@ -34,6 +36,7 @@ class RandomForestClassifierPipeline(BasePipeline):
 
         Returns:
             ndarray, of the prediction results.
+
         """
         features, target = self.load_data_set()
         self.x_train, self.x_test, self.y_train, self.y_test = self.create_training_set(
@@ -54,5 +57,6 @@ class RandomForestClassifierPipeline(BasePipeline):
 
         Returns:
             BaseMetricResult, containing metric information.
+
         """
         return self.metric_handler.compute_metrics(y_true=self.y_test, y_pred=prediction, y_proba=probability)
