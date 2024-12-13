@@ -1,6 +1,7 @@
 """Data Saver Module."""
 
 import pickle
+from pathlib import Path
 
 from src.ml_pipeline_handler.pipeline.base_pipeline import BasePipeline
 
@@ -16,5 +17,6 @@ def save_model(model: BasePipeline, file_name: str) -> None:
         None
 
     """
-    with open(file_name, "wb") as f:
-        pickle.dump(model, f)
+    file_path = Path(file_name)
+    with file_path.open(mode="wb") as f:
+        pickle.dump(obj=model, file=f)

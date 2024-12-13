@@ -4,9 +4,9 @@ import argparse
 
 from loguru import logger
 
+from src.ml_pipeline_handler.io.saver import save_model
 from src.ml_pipeline_handler.pipeline.base_config import PipelineConfig
 from src.ml_pipeline_handler.pipeline.pipeline_factory import PipelineFactory
-from src.ml_pipeline_handler.io.saver import save_model
 
 
 def cli() -> None:
@@ -92,7 +92,7 @@ def cli() -> None:
     metrics = pipeline.compute_metrics(prediction=prediction, probability=probability)
     logger.info(f"Metrics: {metrics}")
 
-    save_model(pipeline, "model.pkl")
+    save_model(model=pipeline, file_name="model.pkl")
 
     logger.info("[END] CLI")
 
